@@ -281,8 +281,14 @@
                 const card = document.createElement('article');
                 card.className = 'card';
                 
-                // Pfad zum Bild zusammenbauen
-                const imagePath = item['@image'] || (item.PathExtension + item.FileNames);
+                
+                // Pfad zum Bild zusammenbauen (erzwingt einen relativen Pfad für GitHub Pages)
+let imagePath = item['@image'] || (item.PathExtension + item.FileNames);
+
+// Falls der Pfad nicht mit ./ beginnt, fügen wir es hinzu, damit GitHub Pages im richtigen Ordner sucht
+if (imagePath && !imagePath.startsWith('./') && !imagePath.startsWith('http')) {
+    imagePath = './' + imagePath;
+}
 
                 card.innerHTML = `
                     <div class="image-container">
