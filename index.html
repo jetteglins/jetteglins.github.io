@@ -6,14 +6,16 @@
     <title>Gute Stube - der Katalog</title>
     <style>
         /* Einbindung der Projektschriften */
+       
+      
         @font-face {
-            font-family: 'Rusch R-Bizarre';
-            src: url('fonts/rusch-r-bizarre.woff2') format('woff2'),
-                 url('fonts/rusch-r-bizarre.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+    font-family: 'Rusch R-Bizarre';
+    src: url('./fonts/rusch-r-bizarre.woff2') format('woff2'),
+         url('./fonts/rusch-r-bizarre.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
         * {
             box-sizing: border-box;
@@ -281,13 +283,13 @@
                 const card = document.createElement('article');
                 card.className = 'card';
                 
-                
-                // Pfad zum Bild zusammenbauen (erzwingt einen relativen Pfad für GitHub Pages)
+               // Pfad zum Bild zusammenbauen
 let imagePath = item['@image'] || (item.PathExtension + item.FileNames);
 
-// Falls der Pfad nicht mit ./ beginnt, fügen wir es hinzu, damit GitHub Pages im richtigen Ordner sucht
-if (imagePath && !imagePath.startsWith('./') && !imagePath.startsWith('http')) {
-    imagePath = './' + imagePath;
+// Wichtig für GitHub Pages: Wenn der Pfad mit einem Schrägstrich beginnt, entfernen wir ihn,
+// damit es ein rein relativer Pfad bleibt.
+if (imagePath.startsWith('/')) {
+    imagePath = imagePath.substring(1);
 }
 
                 card.innerHTML = `
